@@ -1,0 +1,106 @@
+* { 
+    padding: 0px; 
+    margin: 0px;
+    box-sizing: border-box; 
+}
+
+
+
+#nav img {
+    background-image: url('');
+        border-radius: 1%;
+    }
+
+.btn {
+    padding: 10px 20px;
+    color: white;
+    background-color: #4EB9E6;
+    transition: all ease-in-out .3s; 
+}
+
+.btn:hover {
+    color: white;
+    background-color: orange;
+}
+
+.active {
+    border-bottom: 3px solid orange !important; 
+}
+
+html, body { 
+    overflow-x: hidden; 
+}
+
+/* HEADER */
+header .navbar-brand:hover { 
+    color: orange; 
+}
+
+#header { 
+    background-color: #4EB9E6; 
+    
+}
+
+#header .nav-link:hover { 
+    border-bottom: 3px solid orange; 
+}
+
+.navbar-brand55{ 
+    font-size: 28px; 
+    font-weight: 900; 
+}
+
+.nav-link { 
+    color: white !important; 
+    font-size: 24px; 
+    margin: 0px 20px; 
+    transition: all ease-in-out .3s; 
+    border-bottom: 2.5px solid transparent; 
+    width: fit-content; 
+}
+
+
+
+
+
+
+
+/* MAIN */
+#main h1 {
+    font-size: 96px;
+    color: #4EB9E6;
+}
+
+#main .orange {
+    color: orange;
+}
+
+#main p {
+    color: #0b0101;
+}
+.form-group{
+    padding: 20px 100px;
+}
+#div{
+    display: block;
+    height: 293px;
+    width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 20px 100px;
+}
+/* Estilos do footer */
+footer {
+    background-color: #4EB9E6; /* Altera a cor do rodapé */
+    text-align: center; /* Centraliza o texto */
+    padding: 10px 0; /* Espaçamento no rodapé */
+    position: relative; /* Necessário para o flexbox */
+    bottom: 0; /* Coloca o rodapé na parte inferior */
+    width: 100%; /* Garante que o rodapé ocupe toda a largura */
+}
+
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Localização de Pesca</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+  /* Estilo Geral */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+    background-color: #4EB9E6;
+}
+
+header .navbar {
+    padding: 1rem 0;
+}
+
+header .navbar-brand:hover {
+    color: orange;
+}
+
+#nav img {
+    border-radius: 1%; /* Bordas arredondadas na logo */
+}
+
+.navbar-toggler {
+    border-color: transparent; /* Remove borda do botão responsivo */
+}
+
+.navbar-toggler-icon {
+    background-color: orange; /* Cor do ícone no botão responsivo */
+}
+
+.navbar-brand55 {
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.nav-link {
+    color: white !important;
+    font-size: 24px;
+    margin: 0 20px;
+    transition: all ease-in-out 0.3s;
+    border-bottom: 2.5px solid transparent;
+    width: fit-content;
+}
+
+#header .nav-link:hover,
+.navbar .nav-link.active {
+    border-bottom: 3px solid orange;
+    color: #ffc107 !important;
+}
+
+.dropdown-menu {
+    background-color: #fefefe; /* Fundo do dropdown */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.dropdown-item {
+    color: #000;
+    padding: 0.5rem 1rem;
+    transition: all ease-in-out 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: orange;
+    color: white;
+}
+
+/* Botões */
+.btn {
+    padding: 10px 20px;
+    color: white;
+    background-color: #4EB9E6;
+    transition: all ease-in-out 0.3s;
+}
+
+.btn:hover {
+    color: white;
+    background-color: orange;
+}
+
+.active {
+    border-bottom: 3px solid orange !important;
+}
+
+/* MAIN */
+#main h1 {
+    font-size: 96px;
+    color: #4EB9E6;
+}
+
+#main .orange {
+    color: orange;
+}
+
+#main p {
+    color: #0b0101;
+}
+
+/* Container principal */
+#local-container {
+    margin-top: 5rem;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    background-color: #4EB9E6;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos principais */
+.local h2 {
+    font-size: 1.8rem;
+    color: #000000;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Textos descritivos */
+.local p {
+    font-size: 1rem;
+    color: #000000;
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.local p strong {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Imagens */
+.local img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mapas */
+.map iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    margin-bottom: 20px;
+}
+
+/* Container de horários */
+.schedule {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.schedule div {
+    background: #ffffff;
+    padding: 0.7rem 1rem;
+    border-left: 4px solid #ffc107;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    flex: 1 1 calc(50% - 1rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule div p {
+    margin: 0;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #4EB9E6;
+    color: #000000;
+    text-align: center;
+    font-size: 0.9rem;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+
+    
+  </style>
+  
+</head>
+
+<body>
+
+  <header id="header">
+      
+    <nav class="navbar navbar-expand-lg" id="nav">
+      
+     
+        <div class="container">
+          
+           <img src="logo.jpg" alt="Fishing" width="100" height="100"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="localizacao.html">Locais de pesca</a>
+              </li>
+             
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dicas de Pesca
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="guia.html">Guia Iniciante</a></li>
+                  <li><a class="dropdown-item" href="peixe.html">Peixes da Região</a></li>
+                  <li><a class="dropdown-item" href="leis.html">Leis e Práticas ilegais</a></li>
+                  <li><a class="dropdown-item" href="receitas.html">Receitas</a></li>
+                  <li><a class="dropdown-item" href="equipa.html">Equipamentos</a></li>
+                  <li><a class="dropdown-item" href="video.html">Vídeo Aula</a></li>
+                  <li><a class="dropdown-item" href="caledario.html">Calendário Lunar</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="carteirawhast.html">Links úteis</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</header>
+
+
+
+
+
+<div id="local-container" class="container rounded">
+  <div class="local my-4">
+    <h1>Local - Ponte Rio Caveiras</h1>
+    
+    <img src="local/caveiras.jpg" class="img-fluid" alt="Local 1">
+    <button href="https://forms.gle/2vkNcVjrXRF7UBHs7" class="btn btn-primary mt-3">Avaliação no forms</button>
+    <div class="map my-3">
+      <!-- Inserir Google Maps embed aqui -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3526.8303272800913!2d-50.402942!3d-27.876482!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1732084762022!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+
+   <div class="local my-4">
+    <h1>Local - Arroizeira</h1>
+    <img src="local/Pontoreferencia.jpg" class="img-fluid" alt="Local 1">
+    <button href="local/Pontoreferencia.jpg" class="btn btn-primary mt-3">Avaliação no forms</button>
+    <div class="map my-3">
+      <!-- Inserir Google Maps embed aqui -->
+      
+      <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m8!1m3!1d7053.0241800341855!2d-50.4297514444695!3d-27.886254522090447!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m3!3m2!1d-27.8845475!2d-50.4316612!4m0!5e0!3m2!1spt-BR!2sbr!4v1732084589415!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    </div>
+  </div>
+
+  <div class="local my-4">
+    <h1>Pesque Pague Dona Francisca</h1>
+      <picture>
+      <source srcset="dona/IMG-20241015-WA0004.jpg" media="(max-width: 498px)">
+      <source srcset="dona/IMG-20241015-WA0004.jpg" media="(min-width: 499px)">
+      <img src="dona/IMG-20241015-WA0004.jpg" class="img-fluid" alt="Local 2">
+    </picture>
+    <div class="local">
+      <p><strong>Localização:</strong>Otacílio Costa - SC;</p>
+      <h5>Horários de Atendimento:</h5>
+      <div class="schedule">
+        <div>
+          <p><strong>Segunda a Sexta:</strong></p>
+          <p>08:00 - 18:00</p>
+        </div>
+        <div>
+          <p><strong>Sábado:</strong></p>
+          <p>09:00 - 13:00</p>
+        </div>
+        <div>
+          <p><strong>Domingo:</strong></p>
+          <p>Fechado</p>
+        </div>
+        <div>
+          <p><strong>Feriados:</strong></p>
+          <p>10:00 - 14:00</p>
+        </div>
+      </div>
+    </div>
+    <button href="https://forms.gle/d1rht3ATfoXfXraC9" class="btn btn-primary mt-3">Avaliação no forms</button>
+    <div class="map my-3">
+      <!-- Inserir Google Maps embed aqui -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28303.800099498712!2d-50.14452434372081!3d-27.532235413535684!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e00dd3a3ae929f%3A0x37080e837c701570!2sPesque%20e%20Pague%20Dona%20Francisca!5e0!3m2!1spt-BR!2sbr!4v1732084980060!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+<div class="local my-4">
+  <h1>Pesque Pague do Juca</h1>
+  <picture>
+    <source srcset="juca/IMG-20241015-WA0005.jpg" media="(max-width: 498px)">
+    <source srcset="juca/IMG-20241015-WA0005.jpg" media="(min-width: 499px)">
+    <img src="juca/IMG-20241015-WA0005.jpg" class="img-fluid" alt="Local 2">
+  </picture>
+  <div class="local">
+    <p><strong>Localização:</strong>Lages-SC;</p>
+    <h5>Horário de atendimento:</h5>
+    <div class="schedule">
+      <div>
+        <p><strong>Segunda:</strong></p>
+        <p>Fechado</p>
+      </div>
+      <div>
+        <p><strong>Terça a Domingo:</strong></p>
+        <p>10:00 - 19:00</p>
+      </div>
+      <div>
+        <p><strong>Feriados:</strong></p>
+        <p>Nao infomado</p>
+      </div>
+    
+      </div>
+
+  </div>
+  <button  href="https://forms.gle/nwieAfh5iagpVyNp9" class="btn btn-primary mt-3">Avaliação no forms</button>
+  <div class="map my-3">
+    <!-- Inserir Google Maps embed aqui -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3538.302395059737!2d-50.32623968497289!3d-27.803262682756516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f9bdef71f01003%3A0xd8b4d7ce6109d43d!2sLages%2C%20SC!5e0!3m2!1spt-BR!2sbr!4v1623772983521!5m2!1spt-BR!2sbr" allowfullscreen></iframe>
+  </div>
+</div>
+
+<div class="local my-4">
+  <h1>Pesque Pague do Tio Fio </h1>
+  <picture>
+    <source srcset="tiofio/IMG-20241015-WA0003.jpg" media="(max-width: 498px)">
+    <source srcset="tiofio/IMG-20241015-WA0003.jpg" media="(min-width: 499px)">
+    <img src="tiofio/IMG-20241015-WA0003.jpg" class="img-fluid" alt="Local 2">
+  </picture>
+  <div class="local">
+    <p><strong>Localização:</strong>Correia Pinto - SC;</p>
+    <h5>horário de atendimento:</h5>
+    <div class="schedule">
+      <div>
+        <p><strong>Segunda:</strong></p>
+        <p>Fechado</p>
+      </div>
+      <div>
+        <p><strong>Terca a Domingo:</strong></p>
+        <p>09:00 - 13:00</p>
+      </div>
+      <div>
+        <p><strong>Feriados:</strong></p>
+        <p>Nao Informado</p>
+      </div>
+    </div>
+  </div>
+  <button href="https://forms.gle/X82NHHDt99Boi1116" class="btn btn-primary mt-3">Avaliação no forms</button>
+  <div class="map my-3">
+    <!-- Inserir Google Maps embed aqui -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4085.734980297237!2d-50.36085807953153!3d-27.58258415702844!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e03f525630f9f9%3A0x8e6dd3e1044aad95!2sPesque%20pague%20do%20tio%20fio!5e0!3m2!1spt-BR!2sbr!4v1732084881425!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+<div class="local my-4">
+  <h1>Pesque Pague do Tio Fio</h1>
+  
+  <picture>
+    <source srcset="tiofioorre/IMG-20241015-WA0001.jpg" media="(max-width: 498px)">
+    <source srcset="tiofioorre/IMG-20241015-WA0001.jpg" media="(min-width: 499px)">
+    <img src="tiofioorre/IMG-20241015-WA0001.jpg" class="img-fluid" alt="Local 2">
+  </picture>
+  <div class="local">
+      <p><strong>Localização:</strong>Campo Belo - SC;</p>
+      <h5>Horários de Atendimento:</h5>
+      <div class="schedule">
+        <div>
+          <p><strong>Segunda a Terca:</strong></p>
+          <p>Fechado</p>
+        </div>
+        <div>
+          <p><strong>Quarta a Domingo:</strong></p>
+          <p>00:00 - 00:00</p>
+        </div>
+        <div>
+          <p><strong>Feriados:</strong></p>
+          <p>Nao Informado</p>
+        </div>
+      </div>
+    </div>
+  <button href="https://forms.gle/Lso1wnbvfPm364wQ9" class="btn btn-primary mt-3">Avaliaçãono forms</button>
+  <div class="map my-3">
+    <!-- Inserir Google Maps embed aqui -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d19367.60615109063!2d-50.73537393677193!3d-27.961305686045986!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e1d5b47910cc5b%3A0x2826856587d8738e!2sPesque%20pague%20Tio%20Fio!5e0!3m2!1spt-BR!2sbr!4v1732085037688!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+<div class="local my-4">
+  <h1>Pesqueiro São Luiz</h1>
+  
+  <picture>
+    <source srcset="sao/IMG-20241015-WA0002.jpg" media="(max-width: 498px)">
+    <source srcset="sao/IMG-20241015-WA0002.jpg" media="(min-width: 499px)">
+    <img src="sao/IMG-20241015-WA0002.jpg" class="img-fluid" alt="Local 2">
+  </picture>
+  <div class="local">
+    <p><strong>Localização:</strong>Lages - SC;</p>
+    <h5>Horários de Atendimento:</h5>
+    <div class="schedule">
+      <div>
+        <p><strong>Segunda a Segunda :</strong></p>
+        <p>09:00 - 19:00</p>
+      </div>
+      
+      <div>
+        <p><strong>Feriados:</strong></p>
+        <p>Nao Informado</p>
+      </div>
+    </div>
+  </div>
+  <button href="https://forms.gle/M5tcVN3rfTELYw2o7" class="btn btn-primary mt-3">Avaliação no forms</button>
+  <div class="map my-3">
+    <!-- Inserir Google Maps embed aqui -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14126.3451288043!2d-50.22861620412031!3d-27.73005732953244!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e01b162976a083%3A0xd6d4dd688e451f65!2sPesque%20e%20Pague%20S%C3%A3o%20Luiz!5e0!3m2!1spt-BR!2sbr!4v1732085302704!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+
+<div class="local my-4">
+  <h1>Pesque Pague Furlan</h1>
+  
+  <picture>
+    <source srcset="" media="(max-width: 498px)">
+    <source srcset="" media="(min-width: 499px)">
+    <img src="furlan/furaln.jpg" class="img-fluid" alt="Local 2">
+  </picture>
+  <div class="local">
+    <p><strong>Localização:</strong>Lages - SC;</p>
+    <h5>Horários de Atendimento:</h5>
+    <div class="schedule">
+      <div>
+        <p><strong>Segunda a Segunda :</strong></p>
+        <p>09:00 - 19:00</p>
+      </div>
+      
+      <div>
+        <p><strong>Feriados:</strong></p>
+        <p>Nao Informado</p>
+      </div>
+    </div>
+  </div>
+  <button href="https://forms.gle/wD4mEP3khgtAUWCd8" class="btn btn-primary mt-3">Avaliação no forms</button>
+  <div class="map my-3">
+    <!-- Inserir Google Maps embed aqui -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14119.162930455208!2d-50.304356832674515!3d-27.78542151741802!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e019003966c41f%3A0xc426975b1bac134c!2sPesque%20e%20Pague%20Furlan!5e0!3m2!1spt-BR!2sbr!4v1732085267746!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+
+</div>
+
+<footer>
+  <p>&copy; 2024 Guia de Pesca - Lages, Santa Catarina. Todos os direitos reservados.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+ 
+  <link rel="stylesheet" href="assets/js/script.js" />
+</body>
+
+</html>
